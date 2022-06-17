@@ -30,16 +30,18 @@ class _UserInformationState extends State<UserInformation> {
         }
 
         return ListView(
+
           children: snapshot.data!.docs.map((DocumentSnapshot document) {
             Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
             // String docID=snapshot.data!.docs[index].id;
-            return SizedBox(height: 100,
+            return SizedBox(height: 120,
               child: Theme(
                 data: ThemeData(
                   splashColor: Colors.amber,
                   highlightColor: Colors.blue,
                 ),
                 child: ListTile(
+
                   tileColor: Colors.grey,
 
 
@@ -62,45 +64,43 @@ class _UserInformationState extends State<UserInformation> {
                                children: [
 
 
-                                 SingleChildScrollView(
-                                   child: Row(
-                                     children: [
-                                       ElevatedButton(
-                                           onPressed: (){
+                                 Row(
+                                   children: [
+                                     ElevatedButton(
+                                         onPressed: (){
 
-                                             Navigator.pop(context);
+                                           Navigator.pop(context);
 
-                                             Future deleteData(String id) async{
-                                               try {
-                                                 if (currentUser != null) {
-                                                   print(currentUser!.uid);
-                                                 }
-
-                                                 await  FirebaseFirestore.instance
-                                                     .collection("users")
-                                                     .doc(document.id)
-                                                     // .collection("users")
-                                                     // .doc(document.id)
-                                                     .delete();
-                                               }catch (e){
-                                                 return false;
+                                           Future deleteData(String id) async{
+                                             try {
+                                               if (currentUser != null) {
+                                                 print(currentUser!.uid);
                                                }
+
+                                               await  FirebaseFirestore.instance
+                                                   .collection("users")
+                                                   .doc(document.id)
+                                                   // .collection("users")
+                                                   // .doc(document.id)
+                                                   .delete();
+                                             }catch (e){
+                                               return false;
                                              }
-                                             deleteData(document.id);
-                                           },
-                                           child: Text('Delete Book'),
-                                       ),
+                                           }
+                                           deleteData(document.id);
+                                         },
+                                         child: Text('Delete Book'),
+                                     ),
 
 
-                                       // val();
+                                     // val();
 
 
 
-                                       // check? LoggedInWidget():Refresh(),
+                                     // check? LoggedInWidget():Refresh(),
 
-                                     ],
+                                   ],
 
-                                   ),
                                  ),
                                  Row(
                                    children: [

@@ -184,6 +184,7 @@ class LoggedInWidget extends StatelessWidget{
     // return Container();
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Library System'),
         centerTitle: true,
@@ -207,23 +208,25 @@ class LoggedInWidget extends StatelessWidget{
         ],
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+        child: SingleChildScrollView(
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
 
-            ElevatedButton(onPressed:_displayTextInputDialog, child: Text('Add Book')),
-            SizedBox(height: 40,),
-            Text('Books Available',
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),),
-            Divider(),
+              ElevatedButton(onPressed:_displayTextInputDialog, child: Text('Add Book')),
+              SizedBox(height: 40,),
+              Text('Books Available',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),),
+              Divider(),
 
-            SizedBox(height: 300,
-              child: UserInformation(),
-            )
-          ],
+              SizedBox(height: 300,
+                child: UserInformation(),
+              )
+            ],
+          ),
         ),
       ),
     );

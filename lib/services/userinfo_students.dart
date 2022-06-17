@@ -38,7 +38,7 @@ class _UserInformationforstudState extends State<UserInformationforstud> {
           children: snapshot.data!.docs.map((DocumentSnapshot document) {
             Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
             // String docID=snapshot.data!.docs[index].id;
-            return SizedBox(height: 100,
+            return SizedBox(height: 80,
               child: Theme(
                 data: ThemeData(
                   splashColor: Colors.amber,

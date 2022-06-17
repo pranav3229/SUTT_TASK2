@@ -182,6 +182,7 @@ class LoggedInWidget_stud extends StatelessWidget{
     // return Container();
 
     return Scaffold(
+
         drawer: Drawer(
           child: ListView(
             // Important: Remove any padding from the ListView.
@@ -189,15 +190,15 @@ class LoggedInWidget_stud extends StatelessWidget{
             children: [
               const DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: Colors.purple,
                 ),
                 child: Center(child: Text(
                     'My Profile',
-                        style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold,color: Colors.white),
                 )),
               ),
               CircleAvatar(
-                radius: 100,
+                radius: 140,
                 backgroundImage: NetworkImage(user.photoURL!),
               ),
               SizedBox(height: 8,),
@@ -261,6 +262,7 @@ class LoggedInWidget_stud extends StatelessWidget{
           ),
         ),
       appBar: AppBar(
+        backgroundColor: Colors.purple,
         title: Text('Library System'),
         centerTitle: true,
         actions: [
@@ -284,7 +286,7 @@ class LoggedInWidget_stud extends StatelessWidget{
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
 
             // ElevatedButton(onPressed:_displayTextInputDialog, child: Text('Add Book')),

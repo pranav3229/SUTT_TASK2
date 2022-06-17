@@ -85,11 +85,13 @@ class _LoginPageState extends State<LoginPage> {
       child: Form(
         key: _loginInFormKey ,
         child: Scaffold(
+
           // resizeToAvoidBottomInset: false,
-          backgroundColor: Colors.white38,
-          appBar: AppBar(
-            title: Text('Login'),
-          ),
+          backgroundColor: Colors.white,
+          // appBar: AppBar(
+          //   backgroundColor: Colors.purple,
+          //   title: Text('Login'),
+          // ),
           body: Padding(
             padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(
@@ -99,32 +101,52 @@ class _LoginPageState extends State<LoginPage> {
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
 
+                  SizedBox(height:42),
+
                   Text('Admin Login',style: TextStyle(
-                    fontSize: 40,
+                    fontSize: 32,
                     fontWeight: FontWeight.bold,
                   ),),
-                  TextField(
-                    onChanged: (value,){
-                      _email= '$value@gmail.com';
-                      username=_email;
-                    },
-                    decoration: InputDecoration(
-                      hintText: 'Enter Username'
+                  SizedBox(height:35),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextField(
+                      onChanged: (value,){
+                        _email= '$value@gmail.com';
+                        username=_email;
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'Enter Username'
+                      ),
                     ),
                   ),
-                  TextField(
-                    obscureText: true,
-                    onChanged: (value){
-                      _password=value;
-                    },
-                    decoration: InputDecoration(
-                        hintText: 'Enter Password'
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextField(
+                      obscureText: true,
+                      onChanged: (value){
+                        _password=value;
+                      },
+                      decoration: InputDecoration(
+                          hintText: 'Enter Password'
+                      ),
                     ),
+                  ),
+                  SizedBox(
+                    height:28,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton(
+
+                        style: ElevatedButton.styleFrom(
+                          fixedSize: Size(124, 36),
+
+
+                          primary: Colors.purple,
+
+                        ),
                         onPressed: (){
                           void initState() {
 
@@ -155,53 +177,50 @@ class _LoginPageState extends State<LoginPage> {
                       // ),
                     ],
                   ),
-                  SizedBox(height: 200,child:Divider(
-                    thickness: 10,
+                  SizedBox(height:28),
+                  Divider(
+                    thickness: 1,
+                    indent: 18,
+                    endIndent: 18,
                     // height: 350,
 
-                  ), ),
-                  SizedBox(height: 200,child: Text('Student SignIn',style: TextStyle(
-                    fontSize: 40,
+                  ),
+                  SizedBox(height:28),
+                  Text('Student Signin',style: TextStyle(
+                    fontSize: 32,
                     fontWeight: FontWeight.bold,
-                  ),),),
+                  ),),
+                  SizedBox(height:96),
 
 
+                  ElevatedButton.icon(
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
 
-                        style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                      onPrimary: Colors.black,
+                      // minimumSize: Size(double.infinity,50),
+                    ),
+                    onPressed: (){
 
-                          primary: Colors.white,
-                          onPrimary: Colors.black,
-                          // minimumSize: Size(double.infinity,50),
-                        ),
-                        onPressed: (){
+                      final provider=Provider.of<GoogleSignInProvider>(context,listen: false);
+                      provider.googleLogin();
 
-                          final provider=Provider.of<GoogleSignInProvider>(context,listen: false);
-                          provider.googleLogin();
+                      global.b=true;
 
-                          global.b=true;
+                      print('${global.b}');
+                      void initState() {
 
-                          print('${global.b}');
-                          void initState() {
-
-                            Homepage_stud();
+                        Homepage_stud();
 
 
-                          }
-                          // Homepage_stud;
+                      }
+                      // Homepage_stud;
 
 
-                        },
-                        icon: FaIcon(FontAwesomeIcons.google, color: Colors.red),
-                        label: Text('Sign In with Google'),
-                      ),
-
-
-                    ],
+                    },
+                    icon: FaIcon(FontAwesomeIcons.google, color: Colors.red),
+                    label: Text('Sign In with Google'),
                   )
                 ]//.reversed.toList(),
               ),

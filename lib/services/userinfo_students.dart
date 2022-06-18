@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:library_success/services/add_data.dart';
 import 'package:library_success/services/global_variables.dart';
 // import 'package:library_success/services/delete_book.dart';
@@ -45,7 +46,7 @@ class _UserInformationforstudState extends State<UserInformationforstud> {
                   highlightColor: Colors.blue,
                 ),
                 child: ListTile(
-                    tileColor: Colors.grey,
+                    tileColor: Colors.white,
 
 
                     // shrinkWrap: true,
@@ -58,7 +59,7 @@ class _UserInformationforstudState extends State<UserInformationforstud> {
 
 
 
-                    onLongPress: (){
+                    onTap: (){
                       AddUser.check=false;
 
                       global.issue=false;
@@ -132,6 +133,7 @@ class _UserInformationforstudState extends State<UserInformationforstud> {
                                   value:global.issue,
                           onChanged:(bool? value) {
                             print('${global.issue}');
+                            Fluttertoast.showToast(msg: "Book Issued");
 
                             setState(() {
                               global.issue = value!;
@@ -209,6 +211,7 @@ class _UserInformationforstudState extends State<UserInformationforstud> {
                               FlatButton(
                                 child: Text('Issue Book'),
                                 onPressed: () {
+                                  Fluttertoast.showToast(msg: "Book Issued");
 
                                     Future deleteData(String id) async{
                                       try {

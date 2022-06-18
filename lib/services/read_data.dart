@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 // import 'package:library_success/services/delete_book.dart';
 
 
@@ -42,7 +43,7 @@ class _UserInformationState extends State<UserInformation> {
                 ),
                 child: ListTile(
 
-                  tileColor: Colors.grey,
+                  tileColor: Colors.white,
 
 
                   // shrinkWrap: true,
@@ -52,7 +53,7 @@ class _UserInformationState extends State<UserInformation> {
                    title: Text('Book: ${data['Book Name']}'),
                    subtitle: Text('Author: ${data['Author']}'),
 
-                   onLongPress: (){
+                   onTap: (){
                      showDialog(
                        context: context,
                        builder: (context) {
@@ -67,7 +68,13 @@ class _UserInformationState extends State<UserInformation> {
                                  Row(
                                    children: [
                                      ElevatedButton(
+                             style: ElevatedButton.styleFrom(
+                               primary: Colors.purple,
+                               onPrimary: Colors.white,
+                               // minimumSize: Size(double.infinity,50),
+                             ),
                                          onPressed: (){
+                                           Fluttertoast.showToast(msg: "Book Removed");
 
                                            Navigator.pop(context);
 

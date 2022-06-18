@@ -226,8 +226,8 @@ class LoggedInWidget_stud extends StatelessWidget{
               ),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.grey,
-                    onPrimary: Colors.black,
+                    primary: Colors.purple,
+                    onPrimary: Colors.white,
                     // minimumSize: Size(double.infinity,50),
                   ),
                   onPressed: () async {
@@ -265,24 +265,24 @@ class LoggedInWidget_stud extends StatelessWidget{
         backgroundColor: Colors.purple,
         title: Text('Library System'),
         centerTitle: true,
-        actions: [
-          ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.grey,
-                onPrimary: Colors.black,
-                // minimumSize: Size(double.infinity,50),
-              ),
-              onPressed: () async {
-                final provider= Provider.of<GoogleSignInProvider>(context,listen:false);
-                provider.logout();
-                await FirebaseAuth.instance.signOut();
-                global.a=false;
-                global.b=false;
-                print('${global.a} ${global.b}');
-
-              },
-              child: Text('Logout'))
-        ],
+        // actions: [
+        //   ElevatedButton(
+        //       style: ElevatedButton.styleFrom(
+        //         primary: Colors.grey,
+        //         onPrimary: Colors.black,
+        //         // minimumSize: Size(double.infinity,50),
+        //       ),
+        //       onPressed: () async {
+        //         final provider= Provider.of<GoogleSignInProvider>(context,listen:false);
+        //         provider.logout();
+        //         await FirebaseAuth.instance.signOut();
+        //         global.a=false;
+        //         global.b=false;
+        //         print('${global.a} ${global.b}');
+        //
+        //       },
+        //       child: Text('Logout'))
+        // ],
       ),
       body: Center(
         child: Column(
@@ -296,9 +296,9 @@ class LoggedInWidget_stud extends StatelessWidget{
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),),
-            Divider(),
+            Divider(thickness: 1,),
 
-            SizedBox(height: 300,
+            SizedBox(height: 600,
               child: UserInformationforstud(),
             )
           ],

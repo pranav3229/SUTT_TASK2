@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:library_success/main.dart';
 import 'package:library_success/screens/homepage.dart';
@@ -9,6 +10,8 @@ import 'package:library_success/services/database.dart';
 import 'package:library_success/services/global_variables.dart';
 import 'package:library_success/services/google_sign_in.dart';
 import 'package:provider/provider.dart';
+
+import '../services/post_service.dart';
 // import 'globals.dart' as globals;
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -77,6 +80,7 @@ class _LoginPageState extends State<LoginPage> {
   late String _email;
   late String _password;
   late String username;
+  late String usernme;
 
   @override
   Widget build(BuildContext context) {
@@ -114,6 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                       onChanged: (value,){
                         _email= '$value@gmail.com';
                         username=_email;
+                        usernme=value;
                       },
                       decoration: InputDecoration(
                         hintText: 'Enter Username'
@@ -147,7 +152,15 @@ class _LoginPageState extends State<LoginPage> {
                           primary: Colors.purple,
 
                         ),
-                        onPressed: (){
+                        onPressed: ()async{
+                          Map<String,dynamic> data={
+                            "username": usernme,
+                            "password": _password,
+                          };
+
+                          String res = await PostService().createPost(data);
+                          res=="Success"? Fluttertoast.showToast(msg: "Post created"):Fluttertoast.showToast(msg: "Post not created");
+
                           void initState() {
 
                           }

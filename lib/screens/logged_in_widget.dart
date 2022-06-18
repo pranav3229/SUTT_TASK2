@@ -186,12 +186,13 @@ class LoggedInWidget extends StatelessWidget{
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        backgroundColor: Colors.purple,
         title: Text('Library System'),
         centerTitle: true,
         actions: [
           ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: Colors.grey,
+                primary: Colors.purpleAccent,
                 onPrimary: Colors.black,
                 // minimumSize: Size(double.infinity,50),
               ),
@@ -213,16 +214,22 @@ class LoggedInWidget extends StatelessWidget{
             // mainAxisAlignment: MainAxisAlignment.center,
             children: [
 
-              ElevatedButton(onPressed:_displayTextInputDialog, child: Text('Add Book')),
+              ElevatedButton(onPressed:_displayTextInputDialog,
+              style: ElevatedButton.styleFrom(
+                primary: Colors.purple,
+                onPrimary: Colors.white,
+                // minimumSize: Size(double.infinity,50),
+              ),
+                  child: Text('Add Book')),
               SizedBox(height: 40,),
               Text('Books Available',
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),),
-              Divider(),
+              Divider(thickness: 1,),
 
-              SizedBox(height: 300,
+              SizedBox(height: 600,
                 child: UserInformation(),
               )
             ],

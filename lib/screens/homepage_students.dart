@@ -28,7 +28,7 @@ class _Homepage_studState extends State<Homepage_stud> {
                 stream: FirebaseAuth.instance.authStateChanges(),
                 builder:(context,snapshot){
                   if(snapshot.connectionState==ConnectionState.waiting){
-                    return Center(child: CircularProgressIndicator(),);
+                    return Center(child: CircularProgressIndicator(color: Colors.white,),);
                   }
                   else if(snapshot.hasData)
                   {

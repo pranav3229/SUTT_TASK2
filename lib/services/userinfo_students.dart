@@ -138,6 +138,31 @@ class _UserInformationforstudState extends State<UserInformationforstud> {
                             setState(() {
                               global.issue = value!;
                               print('${global.issue}');
+                              Fluttertoast.showToast(msg: "Book Issued");
+                              Future<void> upUser() {
+                                CollectionReference users = FirebaseFirestore.instance.collection('users');
+
+                                // Call the user's CollectionReference to add a new user
+                                return users
+                                    .doc(document.id).update({
+                                  'Book Issued To': '${user.email}'
+
+                                })
+                                    .then((value) => print("User updated"))
+                                    .catchError((error) => print("Failed to update user: $error"));}
+                              upUser();
+
+                              DocumentReference copyFrom = FirebaseFirestore.instance.collection('users').doc(document.id);
+                              DocumentReference copyTo = FirebaseFirestore.instance.collection('Books issued').doc(document.id);
+                              DocumentReference copy1From = FirebaseFirestore.instance.collection('users').doc(document.id);
+                              DocumentReference copy1To = FirebaseFirestore.instance.collection('All Books').doc(document.id);
+                              copy1From.get().then((value) => {
+                                copy1To.set(value.data()),
+                                // deleteData(document.id)
+                              });
+
+
+
                               Future deleteData(String id) async{
                                 try {
                                   if (currentUser != null) {
@@ -154,7 +179,13 @@ class _UserInformationforstudState extends State<UserInformationforstud> {
                                   return false;
                                 }
                               }
-                              deleteData(document.id);
+                              copyFrom.get().then((value) => {
+                                copyTo.set(value.data()),
+                              deleteData(document.id)
+                              });
+
+
+
 
                             }
                             );
@@ -212,24 +243,52 @@ class _UserInformationforstudState extends State<UserInformationforstud> {
                                 child: Text('Issue Book'),
                                 onPressed: () {
                                   Fluttertoast.showToast(msg: "Book Issued");
+                                  Future<void> upUser() {
+                                    CollectionReference users = FirebaseFirestore.instance.collection('users');
 
-                                    Future deleteData(String id) async{
-                                      try {
-                                        if (currentUser != null) {
-                                          print(currentUser!.uid);
-                                        }
+                                    // Call the user's CollectionReference to add a new user
+                                    return users
+                                        .doc(document.id).update({
+                                      'Book Issued To': '${user.email}'
 
-                                        await  FirebaseFirestore.instance
-                                            .collection("users")
-                                            .doc(document.id)
-                                        // .collection("users")
-                                        // .doc(document.id)
-                                            .delete();
-                                      }catch (e){
-                                        return false;
+                                    })
+                                        .then((value) => print("User updated"))
+                                        .catchError((error) => print("Failed to update user: $error"));}
+                                  upUser();
+
+                                  DocumentReference copyFrom = FirebaseFirestore.instance.collection('users').doc(document.id);
+                                  DocumentReference copyTo = FirebaseFirestore.instance.collection('Books issued').doc(document.id);
+                                  DocumentReference copy1From = FirebaseFirestore.instance.collection('users').doc(document.id);
+                                  DocumentReference copy1To = FirebaseFirestore.instance.collection('All Books').doc(document.id);
+                                  copy1From.get().then((value) => {
+                                    copy1To.set(value.data()),
+                                    // deleteData(document.id)
+                                  });
+
+                                  Future deleteData(String id) async{
+                                    try {
+                                      if (currentUser != null) {
+                                        print(currentUser!.uid);
                                       }
+
+                                      await  FirebaseFirestore.instance
+                                          .collection("users")
+                                          .doc(document.id)
+                                      // .collection("users")
+                                      // .doc(document.id)
+                                          .delete();
+                                    }catch (e){
+                                      return false;
                                     }
-                                    deleteData(document.id);
+                                  }
+                                  copyFrom.get().then((value) => {
+                                    copyTo.set(value.data()),
+                                  deleteData(document.id)
+                                  });
+
+
+
+
 
 
 

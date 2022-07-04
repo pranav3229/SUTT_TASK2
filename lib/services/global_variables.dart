@@ -4,4 +4,5 @@ class global{
   static var b=false;
   static var isChecked=false;
   static var issue=false;
+  static var uuu=true;
 }

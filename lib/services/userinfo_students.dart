@@ -145,7 +145,7 @@ class _UserInformationforstudState extends State<UserInformationforstud> {
                                 // Call the user's CollectionReference to add a new user
                                 return users
                                     .doc(document.id).update({
-                                  'Book Issued To': '${user.email}'
+                                  'Book Issued To': '${user.displayName}'
 
                                 })
                                     .then((value) => print("User updated"))
@@ -249,7 +249,7 @@ class _UserInformationforstudState extends State<UserInformationforstud> {
                                     // Call the user's CollectionReference to add a new user
                                     return users
                                         .doc(document.id).update({
-                                      'Book Issued To': '${user.email}'
+                                      'Book Issued To': '${user.displayName}'
 
                                     })
                                         .then((value) => print("User updated"))

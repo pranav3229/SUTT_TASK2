@@ -3,17 +3,26 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:library_success/screens/homepage_students.dart';
 import 'package:library_success/screens/logged_in_widget_students.dart';
+// import 'package:library_success/screens/root/root.dart';
 import 'package:library_success/services/google_sign_in.dart';
 import 'package:library_success/screens/homepage.dart';
 import 'package:library_success/screens/loginpage.dart';
 import 'package:provider/provider.dart';
 import 'package:library_success/services/global_variables.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // final FirebaseAuth _auth = FirebaseAuth. instance;
+  //
+  // Future<void> _signOut() async {
+  // await _auth. signOut();
+// }
+
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -21,10 +30,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return ChangeNotifierProvider(
       create: (context)=>GoogleSignInProvider(),
       child: MaterialApp(
         home: LandingPage(
+        // home: OurRoot(
 
         ),
       ),
@@ -36,6 +47,7 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return FutureBuilder(
       future: _initialization,
       builder: (context,snapshot){

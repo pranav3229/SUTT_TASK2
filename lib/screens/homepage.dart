@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:library_success/screens/logged_in_widget_students.dart';
 import 'package:library_success/screens/loginpage.dart';
 
+import '../services/yeet.dart';
 import 'logged_in_widget.dart';
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -14,6 +15,12 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
 
   ValueNotifier<bool> isnotLoading = ValueNotifier(false);
+  Future <LoginPage> _signOut()  async{
+    await FirebaseAuth.instance.signOut();
+
+    return new LoginPage();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,9 +48,12 @@ class _HomepageState extends State<Homepage> {
                   return LoggedInWidget();
                 }
                 else if(snapshot.hasError){
+
                   return Center(child: Text('Something went wrong'));
                 }
                 else{
+                  // yeet();
+
                   return LoginPage();
                 }
               },

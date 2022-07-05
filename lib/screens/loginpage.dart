@@ -5,7 +5,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:library_success/main.dart';
 import 'package:library_success/screens/homepage.dart';
 import 'package:library_success/screens/homepage_students.dart';
+import 'package:library_success/screens/logged_in_widget.dart';
 import 'package:library_success/screens/logged_in_widget_students.dart';
+// import 'package:library_success/screens/loginpage2.dart';
 import 'package:library_success/screens/student%20login.dart';
 import 'package:library_success/services/atoms.dart';
 import 'package:library_success/services/database.dart';
@@ -14,15 +16,21 @@ import 'package:library_success/services/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:animated_background/animated_background.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 import '../services/post_service.dart';
+
+// import '../services/yeet.dart';
 import 'admin_login.dart';
 // import 'globals.dart' as globals;
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
+
   @override
   State<LoginPage> createState() => _LoginPageState();
+
 
 }
 
@@ -30,7 +38,10 @@ class _LoginPageState extends State<LoginPage>with TickerProviderStateMixin {
 
   // bool b=false;
   // bool a=false;
+
   var currentUser = FirebaseAuth.instance.currentUser;
+
+
   // late String _uid;
   // late String _emaill;
   // String get getUid =>_uid;
@@ -53,6 +64,11 @@ class _LoginPageState extends State<LoginPage>with TickerProviderStateMixin {
   // }
 
   final _loginInFormKey= GlobalKey<FormState>();
+  Future <LoginPage> _signOut()  async{
+    await FirebaseAuth.instance.signOut();
+
+    return new LoginPage();
+  }
   Future<void> _createuser()async{
     try{
       UserCredential userCredential=await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email, password: _password);
@@ -84,6 +100,7 @@ class _LoginPageState extends State<LoginPage>with TickerProviderStateMixin {
       print('Error: $e');
       // return false;
     }catch(e){
+
       print('Error: $e');
       // return false;
     }
@@ -109,6 +126,8 @@ class _LoginPageState extends State<LoginPage>with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    // yeet();
+
     return DefaultTabController(
       length: 2,
       child: ChangeNotifierProvider(
@@ -117,6 +136,37 @@ class _LoginPageState extends State<LoginPage>with TickerProviderStateMixin {
           key: _loginInFormKey ,
           child: Scaffold(
             appBar: AppBar(
+              actions: [
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.purpleAccent,
+                      onPrimary: Colors.black,
+                      // minimumSize: Size(double.infinity,50),
+                    ),
+                    onPressed: () async {
+                      final provider= Provider.of<GoogleSignInProvider>(context,listen:false);
+                      provider.logout();
+                      await FirebaseAuth.instance.signOut();
+
+                      global.a=false;
+                      global.b=false;
+                      final ConnectivityResult result = await Connectivity().checkConnectivity();
+
+                      if (result == ConnectivityResult.wifi) {
+
+                        print('Connected to a Wi-Fi network');
+                        LoginPage();
+                      } else if (result == ConnectivityResult.mobile) {
+                        print('Connected to a mobile network');
+                        LoginPage();
+                      } else {
+                        print('Not connected to any network');
+                        LoggedInWidget();
+                      }
+
+                    },
+                    child: Text('Refresh'))
+              ],
               backgroundColor: Colors.purple,
               title: Text('Library System'),
               centerTitle: true,

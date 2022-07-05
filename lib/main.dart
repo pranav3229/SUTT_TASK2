@@ -2,17 +2,31 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:library_success/screens/homepage_students.dart';
+import 'package:library_success/screens/logged_in_widget.dart';
 import 'package:library_success/screens/logged_in_widget_students.dart';
+// import 'package:library_success/screens/loginpage2.dart';
 // import 'package:library_success/screens/root/root.dart';
 import 'package:library_success/services/google_sign_in.dart';
 import 'package:library_success/screens/homepage.dart';
 import 'package:library_success/screens/loginpage.dart';
+// import 'package:library_success/services/yeet.dart';
 import 'package:provider/provider.dart';
 import 'package:library_success/services/global_variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // yeet();
+  // var connectivityResult = await (Connectivity().checkConnectivity());
+  // if (connectivityResult == ConnectivityResult.mobile) {
+  //   // I am connected to a mobile network.
+  // } else if (connectivityResult == ConnectivityResult.wifi) {
+  //   // I am connected to a wifi network.
+  // }
+
+
   // final FirebaseAuth _auth = FirebaseAuth. instance;
   //
   // Future<void> _signOut() async {
@@ -26,6 +40,11 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
+
+
+
+
 
   // This widget is the root of your application.
   @override
@@ -44,9 +63,26 @@ class MyApp extends StatelessWidget {
 }
 class LandingPage extends StatelessWidget {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  Future <LoginPage> _signOut()  async{
+    await FirebaseAuth.instance.signOut();
+    // final ConnectivityResult result = await Connectivity().checkConnectivity();
+    //
+    // if (result == ConnectivityResult.wifi) {
+    //   print('Connected to a Wi-Fi network');
+    // } else if (result == ConnectivityResult.mobile) {
+    //   print('Connected to a mobile network');
+    // } else {
+    //   print('Not connected to any network');
+    //   LoggedInWidget();
+    // }
+
+    return new LoginPage();
+  }
+
 
   @override
   Widget build(BuildContext context) {
+
 
     return FutureBuilder(
       future: _initialization,
@@ -65,6 +101,7 @@ class LandingPage extends StatelessWidget {
     builder: (context,snapshot){
       if(global.a==true){
         global.a=false;
+
         return Homepage();
       }
 
@@ -72,7 +109,9 @@ class LandingPage extends StatelessWidget {
         global.b=false;
         return Homepage_stud();
       }
+
       return LoginPage();
+
           // if(snapshot.connectionState==ConnectionState.waiting){
           //   return Center(child: CircularProgressIndicator());
           // }
@@ -120,3 +159,17 @@ class LandingPage extends StatelessWidget {
 // }
 
 }
+// check()async{
+//   bool result=await InternetConnectionChecker().hasConnection;
+//   if(result==true)
+//   {
+//     print('net present');
+//
+//   }
+//   else
+//   {
+//     print('net absent');
+//
+//   }
+//
+

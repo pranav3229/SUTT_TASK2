@@ -32,6 +32,8 @@ dependencies:
   intl: ^0.17.0
   flutter_staggered_grid_view: ^0.6.1
   path: ^1.8.1
+  connectivity_plus: ^2.3.5
+  internet_connection_checker: ^0.0.1+4
 
 
 dev_dependencies:
@@ -43,6 +45,10 @@ dev_dependencies:
 
 
 flutter:
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: lib/fonts/Roboto-Light.ttf
 
 
   uses-material-design: true

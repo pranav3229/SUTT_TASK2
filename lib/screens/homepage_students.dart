@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:library_success/screens/logged_in_widget_students.dart';
 import 'package:library_success/screens/loginpage.dart';
 import 'package:library_success/services/google_sign_in.dart';
@@ -15,6 +16,7 @@ class Homepage_stud extends StatefulWidget {
 }
 
 class _Homepage_studState extends State<Homepage_stud> {
+
 
 
   @override
@@ -59,6 +61,7 @@ class _Homepage_studState extends State<Homepage_stud> {
                       print('${global.a} ${global.b}');
                     }
                     logout();
+
                     return LoginPage();
                   }
                 },
